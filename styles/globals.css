@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Theme */
+:root {
+  --primary-bg: #000; /* Primary Background - Black */
+  --secondary-bg: hsla(0, 0%, 40%, 0.09); /* Secondary Background - Slightly Lighter Black */
+  --accent-color: #f374ffe7; /* Accent Color */
+  --text-color: #ffffff;
+}
+
+/* Global Styles */
+body {
+  @apply bg-[var(--primary-bg)] text-white;
+}
+
+/* Highlight Text Selection */
+::selection {
+  background-color: var(--accent-color);
+  color: #000; /* Black text on accent */
+}
+
+/* Buttons */
+.button {
+  @apply bg-[var(--accent-color)] text-black font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md cursor-pointer;
+}
+
+.button:hover {
+  @apply bg-[var(--accent-color)] cursor-pointer;
+}
+
+.button-outline {
+  @apply border border-[var(--accent-color)] text-[var(--accent-color)] font-bold py-2 px-4 rounded-lg transition duration-300;
+}
+
+.button-outline:hover {
+  @apply bg-[var(--accent-color)] text-black;
+}
+
+
+/* Navbar */
+.navbar {
+  @apply flex items-center justify-between bg-[var(--secondary-bg)] p-4;
+}
+
+.navbar-logo {
+  @apply text-white font-bold text-lg;
+}
+
+.navbar-login {
+  @apply bg-[var(--accent-color)] text-black font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md;
+}
+
+/* Input Fields */
+.input {
+  @apply bg-[var(--secondary-bg)] text-white border border-gray-600 rounded-lg p-2 focus:border-[var(--accent-color)] focus:ring-[var(--accent-color)] focus:ring-1 transition;
+}
+
+/* Card / Box Style */
+.card {
+  @apply bg-[var(--secondary-bg)] text-white p-6 rounded-lg shadow-md border border-gray-700 transition;
+}
+
+.card:hover {
+  @apply border-[var(--accent-color)] shadow-lg;
+}
+
+/* Sidebar */
+.sidebar {
+  @apply bg-[var(--secondary-bg)] min-h-screen shadow-lg transition-all duration-300;
+}
+
+/* Sidebar Items */
+.sidebar-item {
+  @apply flex items-center gap-3 p-3 rounded-md text-white hover:bg-gray-800 cursor-pointer transition;
+}
+
+.sidebar-item:hover {
+  @apply bg-[var(--accent-color)];
+}
+
+/* Floating Button */
+.sidebar-toggle {
+  @apply absolute top-5 -right-5 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-700 transition;
+}
+
+
+/* Layout Spacing */
+.layout {
+  @apply flex gap-6; /* Adds space between sidebar & content */
+}
