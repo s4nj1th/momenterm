@@ -19,7 +19,7 @@ export default function Navbar({
         </button>
 
         <Link href="/" className="flex items-center text-2xl font-bold text-white px-2 space-x-2">
-          <GiTwoCoins size={28} className="text-[var(--accent-color)]" />
+          <GiTwoCoins size={40} className="text-[var(--accent-color)]" />
           <span>MomenTerm</span>
         </Link>
       </div>
