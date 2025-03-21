@@ -1,7 +1,7 @@
 
 # MomenTerm
 
-A simple financial advisor web app built.
+a simple financial advisor web app.
 
 (still not published)
 
