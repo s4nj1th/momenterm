@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen text-white bg-black">
       <Sidebar isOpen={isSidebarOpen} />
 
-      <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? "ml-50" : "ml-16"}`}>
+      <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? "ml-16" : "ml-50"}`}>
         <Navbar onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <main className="p-6 mt-16">{children}</main>

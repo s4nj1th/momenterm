@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
 import { GiTwoCoins } from "react-icons/gi";
-import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
 
 export default function Navbar({
   onToggleSidebar,
@@ -19,18 +19,21 @@ export default function Navbar({
         </button>
 
         <Link href="/" className="flex items-center text-2xl font-bold text-white px-2 space-x-2">
-          <GiTwoCoins size={40} className="text-[var(--accent-color)]" />
+          <GiTwoCoins size={40} className="text-[var(--accent-lighter)]" />
           <span>MomenTerm</span>
         </Link>
       </div>
 
-      <div className="flex items-center space-x-6">
+      <div className="flex items-center space-x-4">
         <SignedIn>
           <UserButton afterSignOutUrl="/" />
         </SignedIn>
         <SignedOut>
+          <SignUpButton>
+            <button className="button-outline">Sign up</button>
+          </SignUpButton>
           <SignInButton>
-            <button className="button">Login</button>
+            <button className="button">Log in</button>
           </SignInButton>
         </SignedOut>
       </div>
