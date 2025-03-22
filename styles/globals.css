@@ -11,6 +11,7 @@
   --secondary-bg: hsla(0, 0%, 40%, 0.09);
   --accent-color: #db67e6;
   --accent-lighter: #f581ff;
+  --accent-lightest: #f7a0ff;
   --accent-darker: #db67e679;
   --text-color: #ffffff;
 }

@@ -64,7 +64,7 @@ export default function StockGraph() {
     ctx.lineWidth = 3;
     ctx.beginPath();
 
-    const graphWidth = width * 0.8;
+    const graphWidth = width * 0.65;
     const startX = 0;
 
     let lastX = startX;
@@ -95,7 +95,8 @@ export default function StockGraph() {
       0,
       height
     );
-    fillGradient.addColorStop(0, "#db67e644");
+    fillGradient.addColorStop(0, "#db67e679");
+    fillGradient.addColorStop(0.5, "#db67e644");
     fillGradient.addColorStop(0.9, "#0000");
     ctx.fillStyle = fillGradient;
     ctx.fill();
@@ -143,7 +144,7 @@ export default function StockGraph() {
       />
 
       <motion.div
-        className="absolute bg-white rounded-full z-10"
+        className="absolute bg-[#efefef] rounded-full z-10"
         style={{
           width: 12,
           height: 12,
@@ -156,7 +157,7 @@ export default function StockGraph() {
 
       <button
         onClick={() => setIsRunning(!isRunning)}
-        className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-4 bg-[var(--secondary-bg)] text-white text-xs rounded-lg z-20 cursor-pointer"
+        className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-4 bg-[var(--secondary-bg)] text-white text-xs rounded-lg z-10 cursor-pointer"
       >
         {isRunning ? <FaPause /> : <FaPlay />}
         {/* {isRunning ? "Stop" : "Play"} */}
