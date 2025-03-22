@@ -1,4 +1,5 @@
 "use client";
+import "../styles/vars.css";
 import { useEffect, useRef, useState } from "react";
 import { motion, animate } from "framer-motion";
 import { FaPause, FaPlay } from "react-icons/fa";
@@ -10,9 +11,15 @@ export default function StockGraph() {
   const [headPos, setHeadPos] = useState({ x: 0, y: 0 });
   const [isRunning, setIsRunning] = useState(true);
 
+  const rootStyles = getComputedStyle(document.documentElement);
+  const textColor = rootStyles.getPropertyValue("--text-color").trim();
+
   useEffect(() => {
     const resizeCanvas = () => {
-      setCanvasSize({ width: window.innerWidth, height: window.innerHeight });
+      setCanvasSize({
+        width: window.innerWidth * 0.8,
+        height: window.innerHeight * 0.7,
+      });
     };
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
@@ -64,7 +71,7 @@ export default function StockGraph() {
     ctx.lineWidth = 3;
     ctx.beginPath();
 
-    const graphWidth = width * 0.65;
+    const graphWidth = width * 0.8;
     const startX = 0;
 
     let lastX = startX;
@@ -73,7 +80,7 @@ export default function StockGraph() {
       graphHeight -
       ((data[0] - baseline) / 100) * graphHeight;
 
-    ctx.moveTo(startX, height);
+    ctx.moveTo(startX, lastY);
     data.forEach((val, i) => {
       const x = startX - 5 + (i / data.length) * graphWidth;
       const y =
@@ -86,9 +93,9 @@ export default function StockGraph() {
       lastY = y;
     });
 
-    ctx.lineTo(lastX, height);
-    ctx.closePath();
+    ctx.stroke();
 
+    // Adjusted Fill Gradient for Smoother Fade
     const fillGradient = ctx.createLinearGradient(
       0,
       graphTopPadding,
@@ -98,10 +105,14 @@ export default function StockGraph() {
     fillGradient.addColorStop(0, "#db67e679");
     fillGradient.addColorStop(0.5, "#db67e644");
     fillGradient.addColorStop(0.9, "#0000");
-    ctx.fillStyle = fillGradient;
-    ctx.fill();
 
-    ctx.stroke();
+    ctx.fillStyle = fillGradient;
+
+    // Close Path, But Avoid Harsh Bottom Line
+    ctx.lineTo(lastX, height);
+    ctx.lineTo(startX, height);
+    ctx.closePath();
+    ctx.fill();
 
     animate(
       headPos,
@@ -111,7 +122,7 @@ export default function StockGraph() {
 
     setHeadPos({ x: lastX, y: lastY });
 
-    ctx.strokeStyle = "hsla(0, 0%, 40%, 0.3)";
+    ctx.strokeStyle = "var(--text-color)";
     ctx.lineWidth = 1;
     ctx.setLineDash([6, 6]);
 
@@ -137,17 +148,17 @@ export default function StockGraph() {
     <>
       <motion.canvas
         ref={canvasRef}
-        className="absolute inset-0 bg-transparent pointer-events-none"
+        className="absolute inset-0 bg-transparent pointer-events-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       />
 
       <motion.div
-        className="absolute bg-[#efefef] rounded-full z-10"
+        className="absolute bg-[#efefef] rounded-full"
         style={{
-          width: 12,
-          height: 12,
+          width: 10,
+          height: 10,
           top: headPos.y - 6,
           left: headPos.x - 6,
         }}
@@ -157,10 +168,9 @@ export default function StockGraph() {
 
       <button
         onClick={() => setIsRunning(!isRunning)}
-        className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-4 bg-[var(--secondary-bg)] text-white text-xs rounded-lg z-10 cursor-pointer"
+        className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-4 bg-[var(--secondary-bg)] text-[var(--text-color)] text-xs rounded-lg z-10 pointer-events-auto cursor-pointer"
       >
         {isRunning ? <FaPause /> : <FaPlay />}
-        {/* {isRunning ? "Stop" : "Play"} */}
       </button>
     </>
   );

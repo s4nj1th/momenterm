@@ -8,7 +8,7 @@ export default function GridLines() {
   // Resize canvas dynamically
   useEffect(() => {
     const resizeCanvas = () => {
-      setCanvasSize({ width: window.innerWidth, height: window.innerHeight });
+      setCanvasSize({ width: window.innerWidth * 0.8, height: window.innerHeight * 0.7 });
     };
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);

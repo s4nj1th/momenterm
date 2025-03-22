@@ -1,0 +1,27 @@
+:root.dark {
+  /* 🌑 Dark Mode (Default) */
+  --primary-bg: #000;
+  --secondary-bg: hsla(0, 0%, 40%, 0.09);
+  --sec-bg-op: #090909;
+  --accent-color: #db67e6;
+  --accent-lighter: #f581ff;
+  --accent-lightest: #f7a0ff;
+  --accent-darker: #db67e679;
+  --text-color: #ffffff;
+  --alt-tex-col: #000;
+  --input-bg: var(--secondary-bg);
+}
+
+/* 🌞 Light Mode */
+:root {
+  --primary-bg: #ffffff;
+  --secondary-bg: rgba(0, 0, 0, 0.06);
+  --sec-bg-op: #f5f5f5;
+  --accent-color: #b534e6;
+  --accent-lighter: #d55bf5;
+  --accent-lightest: #e89bff;
+  --accent-darker: #b534e667;
+  --text-color: #111111;
+  --alt-text-col: #fff;
+  --input-bg: #f0f0f0;
+}

@@ -1,21 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
 @import "tailwindcss";
+@import "./vars.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Custom Theme */
-:root {
-  --primary-bg: #000;
-  --secondary-bg: hsla(0, 0%, 40%, 0.09);
-  --accent-color: #db67e6;
-  --accent-lighter: #f581ff;
-  --accent-lightest: #f7a0ff;
-  --accent-darker: #db67e679;
-  --text-color: #ffffff;
-}
-
 
 body {
   font-family: "Atkinson Hyperlegible", sans-serif;
@@ -24,7 +13,7 @@ body {
 
 /* Global Styles */
 body {
-  @apply bg-[var(--primary-bg)] text-white;
+  @apply bg-[var(--primary-bg)] text-[var(--text-color)];
 }
 
 /* Highlight Text Selection */
@@ -34,7 +23,7 @@ body {
 
 /* Buttons */
 .button {
-  @apply bg-[var(--accent-color)] text-black font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md cursor-pointer;
+  @apply bg-[var(--accent-color)] text-[var(--alt-text-col)] font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md cursor-pointer;
 }
 
 .button:hover {
@@ -55,25 +44,25 @@ body {
 
 /* Navbar */
 .navbar {
-  @apply flex items-center justify-between bg-[var(--secondary-bg)] p-4;
+  @apply flex items-center justify-between bg-[var(--sec-bg-op)] p-4;
 }
 
 .navbar-logo {
-  @apply text-white font-bold text-lg;
+  @apply text-[var(--text-color)] font-bold text-lg;
 }
 
 .navbar-login {
-  @apply bg-[var(--accent-color)] text-black font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md;
+  @apply bg-[var(--accent-color)] text-[var(--alt-text-col)] font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md;
 }
 
 /* Input Fields */
 .input {
-  @apply bg-[var(--secondary-bg)] text-white border border-gray-600 rounded-lg p-2 focus:border-[var(--accent-color)] focus:ring-[var(--accent-color)] focus:ring-1 transition;
+  @apply bg-[var(--secondary-bg)] text-[var(--text-color)] border border-gray-600 rounded-lg p-2 focus:border-[var(--accent-color)] focus:ring-[var(--accent-color)] focus:ring-1 transition;
 }
 
 /* Card / Box Style */
 .card {
-  @apply bg-[var(--secondary-bg)] text-white p-6 rounded-lg shadow-md border border-gray-700 transition;
+  @apply bg-[var(--secondary-bg)] text-[var(--text-color)] p-6 rounded-lg shadow-md border border-gray-700 transition;
 }
 
 .card:hover {
@@ -82,12 +71,12 @@ body {
 
 /* Sidebar */
 .sidebar {
-  @apply bg-[var(--secondary-bg)] min-h-screen shadow-lg transition-all duration-300;
+  @apply bg-[var(--sec-bg-op)] min-h-screen shadow-lg transition-all duration-300;
 }
 
 /* Sidebar Items */
 .sidebar-item {
-  @apply flex items-center w-full m-auto py-3 rounded-md text-white hover:bg-[var(--secondary-bg)] transition-all duration-300;
+  @apply flex items-center w-full m-auto py-3 rounded-md text-[var(--text-color)] hover:bg-[var(--secondary-bg)] transition-all duration-300;
 }
 
 /* Sidebar Text - Fade In/Out */
@@ -98,7 +87,7 @@ body {
 
 /* Floating Button */
 .sidebar-toggle {
-  @apply absolute top-5 -right-5 bg-[var(--secondary-bg)] text-white p-2 rounded-full shadow-lg hover:bg-[var(--secondary-bg)] transition duration-300;
+  @apply absolute top-5 -right-5 bg-[var(--secondary-bg)] text-[var(--text-color)] p-2 rounded-full shadow-lg hover:bg-[var(--secondary-bg)] transition duration-300;
 }
 
 /* Layout Spacing */
@@ -112,7 +101,7 @@ body {
 }
 
 .alt-button:hover {
-  @apply bg-[var(--accent-color)] text-black;
+  @apply bg-[var(--accent-color)] text-[var(--alt-text-col)];
 }
 
 .alt-button:hover .icon {
@@ -120,7 +109,7 @@ body {
 }
 
 .first-time-div {
-  @apply relative flex flex-col items-center justify-center min-h-180 text-white text-center overflow-hidden border border-[var(--secondary-bg)] rounded-md;
+  @apply relative flex flex-col items-center justify-center min-h-180 text-[var(--text-color)] text-center overflow-hidden border border-[var(--secondary-bg)] rounded-md;
 }
 
 .stained-glass-bg {

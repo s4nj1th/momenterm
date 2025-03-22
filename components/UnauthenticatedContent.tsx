@@ -3,65 +3,72 @@ import { GiTwoCoins } from "react-icons/gi";
 import { motion } from "framer-motion";
 import StockGraph from "./StockGraph";
 import GridLines from "./GridLines";
+import FeaturesAd from "./FeatureAd";
 
 export default function UnauthenticatedContent() {
   return (
-    <div className="first-time-div relative flex flex-col items-center justify-center min-h-screen">
-      {/* Background Graph */}
-      <div className="absolute inset-0 z-0">
-        <StockGraph />
-        <GridLines />
+    <div className="w-full">
+      {/* Hero Section */}
+      <div className="relative flex flex-col items-center justify-center h-screen min-h-screen">
+        {/* Background Graph - Canvas at 80vw x 80vh */}
+        <div className="absolute w-[80vw] h-[80vh]">
+          <StockGraph />
+          <GridLines />
+        </div>
+
+        {/* Main Content - 80% Width & Height */}
+        <div className="relative flex flex-col items-center justify-center w-[80vw] h-[80vh] text-center px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-5xl font-bold drop-shadow-lg mt-[-3rem]"
+          >
+            Manage your Finances
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="mt-2 text-lg opacity-90"
+          >
+            Get real-time advice for your investments.
+          </motion.p>
+
+          <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1 }}
+            className="mt-6 flex flex-col items-center space-y-3 opacity-80"
+          >
+            <SignUpButton asChild>
+              <motion.button
+                className="alt-button flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+              >
+                <span>Get Started</span>
+                <GiTwoCoins className="icon" size={30} />
+              </motion.button>
+            </SignUpButton>
+
+            {/* Sign-in Link - Placed Directly Below the Button */}
+            <span className="text-sm text-[var(--text-color)]">
+              Already have an account?{" "}
+              <SignInButton>
+                <a className="text-[var(--accent-color)] hover:underline cursor-pointer">
+                  Sign in
+                </a>
+              </SignInButton>
+            </span>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-40 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="text-5xl font-bold drop-shadow-lg"
-        >
-          Manage your Finances.
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="mt-2 text-lg opacity-90"
-        >
-          Get real-time advice for your investments.
-        </motion.p>
-
-        <motion.div
-          initial={{ y: 10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="mt-6 flex justify-center space-x-4 text-sm opacity-80"
-        >
-          <SignUpButton asChild>
-            <motion.button className="alt-button flex items-center gap-2" whileHover={{ scale: 1.05 }}>
-              <span>Get Started</span>
-              <GiTwoCoins className="icon" size={30} />
-            </motion.button>
-          </SignUpButton>
-        </motion.div>
+      {/* Features Section (Below, Only Visible When Scrolling) */}
+      <div className="w-full py-20 bg-[var(--secondary-bg)] flex justify-center rounded-lg">
+        <FeaturesAd />
       </div>
-
-      {/* Centered Sign-in Link at Bottom */}
-      <motion.div
-        initial={{ y: 10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm opacity-80 z-40"
-      >
-        <SignInButton>
-          <span>
-            Already have an account?{" "}
-            <a className="plain-link cursor-pointer hover:underline">Sign in</a>
-          </span>
-        </SignInButton>
-      </motion.div>
     </div>
   );
 }

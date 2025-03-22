@@ -19,14 +19,14 @@ export default function Navbar({
       <div className="flex items-center space-x-4">
         <button
           onClick={onToggleSidebar}
-          className="text-white text-2xl p-2 rounded-md hover:bg-[var(--secondary-bg)] transition cursor-pointer"
+          className="text-[var(--text-color)] text-2xl p-2 rounded-md hover:bg-[var(--secondary-bg)] transition cursor-pointer"
         >
           <FiMenu />
         </button>
 
         <Link
           href="/"
-          className="flex items-center text-2xl font-bold text-white px-2 space-x-2"
+          className="flex items-center text-2xl font-bold text-[var(--text-color)] px-2 space-x-2"
         >
           <GiTwoCoins size={40} className="text-[var(--accent-lighter)]" />
           <span>MomenTerm</span>
