@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
 import { GiTwoCoins } from "react-icons/gi";
@@ -14,6 +15,8 @@ export default function Navbar({
 }: {
   onToggleSidebar: () => void;
 }) {
+  const router = useRouter(); // Get current route
+
   return (
     <header className="navbar w-full h-16 fixed top-0 left-0 p-4 flex justify-between items-center px-[5vw] z-50">
       <div className="flex items-center space-x-4">
@@ -33,10 +36,24 @@ export default function Navbar({
         </Link>
       </div>
 
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-6">
+        {/* Watchlist Link - Prevents reloading if already on /watchlist */}
         <SignedIn>
+          {router.pathname !== "/watchlist" ? (
+            <Link
+              href="/watchlist"
+              className="text-[var(--text-color)] text-lg font-medium hover:text-[var(--accent-lighter)] transition"
+            >
+              Watchlist
+            </Link>
+          ) : (
+            <span className="text-[var(--text-color)] text-lg font-medium cursor-default opacity-60">
+              Watchlist
+            </span>
+          )}
           <UserButton afterSignOutUrl="/" />
         </SignedIn>
+
         <SignedOut>
           <SignUpButton>
             <button className="button-outline">Sign up</button>
