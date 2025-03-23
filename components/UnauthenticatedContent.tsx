@@ -6,6 +6,7 @@ import { FiChevronDown } from "react-icons/fi";
 import StockGraph from "./StockGraph";
 import GridLines from "./GridLines";
 import FeaturesAd from "./FeatureAd";
+import PersonalAd from "./PersonalAd";
 
 export default function UnauthenticatedContent() {
   const [showScrollHint, setShowScrollHint] = useState(true);
@@ -90,9 +91,15 @@ export default function UnauthenticatedContent() {
       </div>
 
       {/* Features Section (Below, Only Visible When Scrolling) */}
-      <div className="w-full py-20 bg-[var(--secondary-bg)] flex justify-center rounded-lg">
+      <div className="w-full py-20 flex justify-center rounded-lg">
         <FeaturesAd />
       </div>
+
+      {/* Personalization Section (Below, Only Visible When Scrolling) */}
+      <div className="w-full py-20 flex justify-center rounded-lg">
+        <PersonalAd />
+      </div>
+
     </div>
   );
 }

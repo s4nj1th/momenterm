@@ -8,7 +8,6 @@ export default function StockGraph() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [data, setData] = useState<number[]>([]);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
-  const [headPos, setHeadPos] = useState({ x: 0, y: 0 });
   const [isRunning, setIsRunning] = useState(true);
   const animationRef = useRef<number | null>(null);
   const lastUpdateTime = useRef(0);
@@ -17,15 +16,11 @@ export default function StockGraph() {
   useEffect(() => {
     const resizeCanvas = () => {
       const width = window.innerWidth * 0.8;
-      const height = window.innerHeight * 0.7;
       const maxHeight = width;
-  
-      // Calculate how much to shift down
-      const verticalShift = height > maxHeight ? (height - maxHeight) / 2 : 0;
-  
-      setCanvasSize({ width, height, verticalShift });
+      const height = Math.min(window.innerHeight * 0.7, maxHeight);
+      setCanvasSize({ width, height });
     };
-  
+
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
     return () => window.removeEventListener("resize", resizeCanvas);
@@ -80,7 +75,7 @@ export default function StockGraph() {
 
     const graphHeight = height * 0.7;
     const graphTopPadding = height * 0.15;
-    const graphWidth = width * 0.8;
+    const graphWidth = width * 0.9;
 
     ctx.clearRect(0, 0, width, height);
 
@@ -134,7 +129,7 @@ export default function StockGraph() {
     ctx.closePath();
     ctx.fill();
 
-    // Dashed guide lines with fixed 0.7 opacity
+    // Dashed guide lines
     ctx.strokeStyle = "rgba(219, 103, 230, 0.7)";
     ctx.lineWidth = 1;
     ctx.setLineDash([6, 6]);

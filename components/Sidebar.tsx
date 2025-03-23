@@ -17,14 +17,14 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
   return (
     <aside
       className={`fixed left-0 top-[64px] h-[calc(100vh-64px)] shadow-lg bg-[var(--sec-bg-op)] overflow-hidden transition-all duration-500 ease-in-out px-3 ${
-        isOpen ? "w-16" : "w-56"
+        isOpen ? "w-56" : "w-16"
       }`}
     >
       <nav className="mt-6 flex flex-col">
         <ul className="space-y-3">
-          <SidebarItem href="/" icon={<FiHome size={22} />} text="Home" showText={!showText} />
-          <SidebarItem href="/dashboard" icon={<FiBarChart2 size={22} />} text="Dashboard" showText={!showText} />
-          <SidebarItem href="/settings" icon={<FiSettings size={22} />} text="Settings" showText={!showText} />
+          <SidebarItem href="/" icon={<FiHome size={22} />} text="Home" showText={isOpen} />
+          <SidebarItem href="/dashboard" icon={<FiBarChart2 size={22} />} text="Dashboard" showText={isOpen} />
+          <SidebarItem href="/settings" icon={<FiSettings size={22} />} text="Settings" showText={isOpen} />
         </ul>
       </nav>
     </aside>

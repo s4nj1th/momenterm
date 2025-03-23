@@ -6,13 +6,13 @@ import Navbar from "./Navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMobile, setIsMobile] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // ❌ Defaulted to false for larger screens
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const mobileView = window.innerWidth < 640;
       setIsMobile(mobileView);
-      setIsSidebarOpen(mobileView); // ✅ Sidebar opens only on mobile by default
+      setIsSidebarOpen(false); // Default collapsed
     };
 
     handleResize(); // Run on mount
@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Desktop Sidebar - Starts Collapsed */}
       {!isMobile && <Sidebar isOpen={isSidebarOpen} />}
 
-      {/* Mobile Sidebar - Opens By Default */}
+      {/* Mobile Sidebar */}
       {isMobile && <SidebarSm isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />}
 
       {/* Main Content */}
@@ -34,8 +34,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           isMobile
             ? "w-full"
             : isSidebarOpen
-            ? "w-[calc(100%-4rem)] ml-16"
-            : "w-[calc(100%-14rem)] ml-56"
+            ? "w-[calc(100%-14rem)] ml-56"
+            : "w-[calc(100%-4rem)] ml-16"
         }`}
       >
         <Navbar onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { FiHome, FiBarChart2, FiSettings, FiMenu, FiX } from "react-icons/fi";
+import { FiHome, FiBarChart2, FiSettings, FiX } from "react-icons/fi";
 
 export default function SidebarSm({
   isOpen,
@@ -11,14 +11,6 @@ export default function SidebarSm({
 }) {
   return (
     <>
-      {/* Hamburger Menu Button */}
-      <button
-        onClick={onClose}
-        className="fixed top-4 left-4 z-50 bg-[var(--secondary-bg)] p-2 rounded-md shadow-md text-white"
-      >
-        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-      </button>
-
       {/* Sidebar Container */}
       <div
         className={`fixed inset-0 z-40 transition-transform duration-300 ease-in-out ${
@@ -26,7 +18,8 @@ export default function SidebarSm({
         }`}
       >
         {/* Sidebar */}
-        <aside className="fixed top-0 left-0 h-full w-[80vw] max-w-[300px] bg-[var(--secondary-bg)] shadow-lg">
+        <aside className="fixed top-0 left-0 h-full w-[80vw] max-w-[300px] bg-[var(--sec-bg-op)] shadow-lg p-4">
+
           {/* Sidebar Navigation */}
           <nav className="mt-16 flex flex-col">
             <ul className="space-y-4 text-white text-lg">
@@ -36,9 +29,6 @@ export default function SidebarSm({
             </ul>
           </nav>
         </aside>
-
-        {/* Clickable Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-40" onClick={onClose} />
       </div>
     </>
   );
@@ -49,7 +39,7 @@ function SidebarItem({ href, icon, text }: { href: string; icon: React.ReactNode
     <li>
       <Link
         href={href}
-        className="flex items-center px-6 py-4 hover:bg-[var(--primary-bg)] transition-all"
+        className="flex items-center px-6 py-4 hover:bg-[var(--secondary-bg)] rounded transition-all"
       >
         <div className="w-8 flex justify-center">{icon}</div>
         <span className="ml-3">{text}</span>
