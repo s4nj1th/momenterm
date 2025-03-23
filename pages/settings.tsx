@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Switch } from "@headlessui/react";
+import { useRouter } from "next/router";
 
 export default function Settings() {
   const { user, isSignedIn } = useUser();
+  const router = useRouter();
   const [darkMode, setDarkMode] = useState(false);
 
   // Load the saved theme on first render
@@ -31,9 +33,46 @@ export default function Settings() {
     }
   };
 
+  const saveChanges = () => {
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+    router.push("/");
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-8 mt-16 bg-[var(--secondary-bg)] text-[var(--text-color)] rounded-xl shadow-lg transition-all">
       <h1 className="text-3xl font-bold mb-6 text-center">Settings</h1>
+
+      {isSignedIn && (
+        <div className="flex items-center gap-4 mb-6">
+          <img
+            src={user.imageUrl}
+            alt="Profile"
+            className="w-16 h-16 rounded-full border-2 border-[var(--accent-color)]"
+          />
+
+          <div>
+            <p className="text-lg font-semibold">
+              {user.fullName || "No Name Set"}
+            </p>
+            <p className="text-sm text-gray-400">{user.primaryEmailAddress}</p>
+          </div>
+        </div>
+      )}
+
+      {/* Email Settings - Show Only If Signed In */}
+      {isSignedIn && (
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-300">
+            Email
+          </label>
+          <input
+            type="email"
+            value={user.primaryEmailAddress}
+            disabled
+            className="input mt-2 w-full bg-gray-800 text-gray-500 cursor-not-allowed"
+          />
+        </div>
+      )}
 
       {/* Theme Toggle */}
       <div className="flex justify-between items-center p-4 rounded-lg transition">
@@ -54,7 +93,9 @@ export default function Settings() {
       </div>
 
       {/* Save Button */}
-      <button className="button w-full mt-6 py-3 text-lg font-semibold">Save Changes</button>
+      <button onClick={saveChanges} className="button w-full mt-6 py-3 text-lg font-semibold">
+        Save Changes
+      </button>
     </div>
   );
 }

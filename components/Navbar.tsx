@@ -33,7 +33,8 @@ export default function Navbar({
         </Link>
       </div>
 
-      <div className="flex items-center space-x-4">
+      {/* Hide login/signup on mobile */}
+      <div className="hidden sm:flex items-center space-x-4">
         <SignedIn>
           <UserButton afterSignOutUrl="/" />
         </SignedIn>

@@ -23,7 +23,7 @@ body {
 
 /* Buttons */
 .button {
-  @apply bg-[var(--accent-color)] text-[var(--alt-text-col)] font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md cursor-pointer;
+  @apply bg-[var(--accent-color)] text-white font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md cursor-pointer;
 }
 
 .button:hover {
@@ -101,7 +101,7 @@ body {
 }
 
 .alt-button:hover {
-  @apply bg-[var(--accent-color)] text-[var(--alt-text-col)];
+  @apply bg-[var(--accent-color)] text-[var(--alt-text-color)];
 }
 
 .alt-button:hover .icon {

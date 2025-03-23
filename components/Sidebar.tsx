@@ -16,7 +16,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
 
   return (
     <aside
-      className={`fixed left-0 top-[64px] h-[calc(100vh-64px)] shadow-lg bg-[var(--secondary-bg)] overflow-hidden transition-all duration-500 ease-in-out px-3 ${
+      className={`fixed left-0 top-[64px] h-[calc(100vh-64px)] shadow-lg bg-[var(--sec-bg-op)] overflow-hidden transition-all duration-500 ease-in-out px-3 ${
         isOpen ? "w-16" : "w-56"
       }`}
     >
@@ -36,10 +36,16 @@ function SidebarItem({ href, icon, text, showText }: { href: string; icon: React
     <li>
       <Link
         href={href}
-        className="sidebar-item"
+        className="flex items-center px-2 py-3 rounded hover:bg-[var(--secondary-bg)] transition-all"
       >
         <div className="w-10 flex justify-center">{icon}</div>
-        {showText && <span className="ml-2 opacity-100 transition-opacity duration-300">{text}</span>}
+        <span
+          className={`ml-2 transition-all duration-300 ${
+            showText ? "opacity-100 w-auto" : "opacity-0 w-0"
+          }`}
+        >
+          {text}
+        </span>
       </Link>
     </li>
   );
