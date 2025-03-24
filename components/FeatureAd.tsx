@@ -120,7 +120,7 @@ export default function FeaturesAd() {
                     }}
                     whileHover={{ opacity: 1, scale: 1.1 }}
                   >
-                    <LuSparkle size={80} />
+                    <LuSparkle size={60} />
                   </motion.div>
                 </motion.div>
               )}
