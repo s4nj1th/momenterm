@@ -1,6 +1,6 @@
-"use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { LuSparkle } from "react-icons/lu";
 
 export default function FeaturesAd() {
   const features = [
@@ -39,17 +39,13 @@ export default function FeaturesAd() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8 w-full max-w-screen-lg mx-auto py-12 px-6">
+    <div className="flex flex-col md:flex-row items-center gap-8 w-full max-w-screen-lg mx-auto py-4 px-6">
       {/* Left Section - Title & Explanation Container */}
       <div className="md:w-1/2 text-center relative">
-        <motion.div
-          className={`flex flex-col items-center transition-transform duration-300 ease-out ${
-            activeExplanation ? "md:-translate-y-20" : ""
-          }`}
-        >
+        <motion.div className="flex flex-col items-center">
           {/* Title */}
           <motion.h2
-            className="relative text-4xl md:text-5xl font-bold mb-8 px-2 py-1 text-[var(--text-color)]"
+            className="relative -top-20 text-4xl md:text-5xl font-bold mb-8 px-2 py-1 text-[var(--text-color)]"
             animate={{
               backgroundColor: ["var(--accent-lit-tra)", "var(--accent-tra)"],
             }}
@@ -64,12 +60,12 @@ export default function FeaturesAd() {
             Smarter Investing Starts Here
           </motion.h2>
 
-          {/* Explanation for Desktop */}
+          {/* Explanation/Icon Section */}
           <div className="h-10 hidden md:block">
             <AnimatePresence mode="wait">
-              {activeExplanation && (
+              {activeExplanation ? (
                 <motion.p
-                  key={activeExplanation}
+                  key="explanation"
                   className="relative text-xl font-medium text-[var(--text-color)] opacity-80"
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 0.8, y: 0 }}
@@ -78,6 +74,55 @@ export default function FeaturesAd() {
                 >
                   {activeExplanation}
                 </motion.p>
+              ) : (
+                <motion.div
+                  key="icon"
+                  className="relative flex items-center text-[var(--text-color)]  justify-center"
+                  initial={{ opacity: 0.4 }}
+                  animate={{ opacity: [0.4, 0.2, 0.4]}}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  whileHover={{ opacity: 1 }} // Stops opacity animation on hover
+                >
+                  {/* Sparkle - Big (Lower Bounce) */}
+                  <motion.div
+                    className="absolute top-0 animate-bounce"
+                    style={{
+                      animationDuration: "10s", // Slower bounce
+                    }}
+                    initial={{ opacity: 0.8, scale: 0.9, y: 0 }}
+                    animate={{ scale: [1, 1.03, 1], y: [0, -1, 0] }} // **Lower bounce**
+                    transition={{
+                      duration: 24,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    whileHover={{ opacity: 1, scale: 1.2 }}
+                  >
+                    <LuSparkle size={140} />
+                  </motion.div>
+
+                  {/* Sparkle - Small (Higher & Faster Bounce) */}
+                  <motion.div
+                    className="absolute -top-15 left-12 animate-bounce"
+                    style={{
+                      animationDuration: "4s", // Faster bounce
+                    }}
+                    initial={{ opacity: 0.8, scale: 0.7, y: 0 }}
+                    animate={{ scale: [1, 1.1, 1], y: [0, -5, 0] }} // **Higher bounce**
+                    transition={{
+                      duration: 12,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    whileHover={{ opacity: 1, scale: 1.1 }}
+                  >
+                    <LuSparkle size={80} />
+                  </motion.div>
+                </motion.div>
               )}
             </AnimatePresence>
           </div>

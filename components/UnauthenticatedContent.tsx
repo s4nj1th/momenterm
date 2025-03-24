@@ -96,7 +96,7 @@ export default function UnauthenticatedContent() {
       </div>
 
       {/* Personalization Section (Below, Only Visible When Scrolling) */}
-      <div className="w-full py-20 flex justify-center rounded-lg">
+      <div className="w-full mt-50 py-20 flex justify-center rounded-lg">
         <PersonalAd />
       </div>
 

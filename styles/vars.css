@@ -11,6 +11,8 @@
   --accent-lightest: #f7a0ff;
   --accent-darker: #db67e679;
   --text-color: #ffffff;
+  --text-color-hf: #ddd;
+  --text-color-tra: #ffffff88;
   --alt-text-color: #000000;
   --input-bg: var(--secondary-bg);
 }
@@ -27,6 +29,8 @@
   --accent-lightest: #e89bff;
   --accent-darker: #b534e667;
   --text-color: #111111;
+  --text-color-hf: #222;
+  --text-color-tra: #11111188;
   --alt-text-color: #fff;
   --input-bg: #f0f0f0;
 }
