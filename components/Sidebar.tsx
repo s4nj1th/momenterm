@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FiHome, FiBarChart2, FiSettings } from "react-icons/fi";
+import { FiHome, FiBarChart2, FiSettings, FiStar } from "react-icons/fi"; // Added FiStar for Watchlist icon
 import { useEffect, useState } from "react";
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
@@ -24,6 +24,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
         <ul className="space-y-3">
           <SidebarItem href="/" icon={<FiHome size={22} />} text="Home" showText={isOpen} />
           <SidebarItem href="/dashboard" icon={<FiBarChart2 size={22} />} text="Dashboard" showText={isOpen} />
+          <SidebarItem href="/watchlist" icon={<FiStar size={22} />} text="Watchlist" showText={isOpen} /> {/* ✅ Added Watchlist */}
           <SidebarItem href="/settings" icon={<FiSettings size={22} />} text="Settings" showText={isOpen} />
         </ul>
       </nav>
