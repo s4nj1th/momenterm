@@ -40,21 +40,28 @@ const timelineSteps = [
 export default function PersonalAd() {
   return (
     <div className="w-full max-w-6xl mx-auto py-12 px-6 relative flex flex-col items-center text-center">
-      <motion.h2
-        className="w-fit text-4xl md:text-5xl font-bold mb-14 px-2 py-1 text-[var(--text-color)]"
-        animate={{
-          backgroundColor: ["var(--accent-lit-tra)", "var(--accent-tra)"],
-        }}
-        transition={{
-          delay: 2,
-          duration: 3,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        viewport={{ once: true }}
       >
-        Make it your own
-      </motion.h2>
+        <motion.h2
+          className="relative -top-35 text-4xl md:text-5xl font-bold mb-8 px-2 py-1 text-[var(--text-color)]"
+          animate={{
+            backgroundColor: ["var(--accent-lit-tra)", "var(--accent-tra)"],
+          }}
+          transition={{
+            delay: 2,
+            duration: 3,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        >
+          Make it your own
+        </motion.h2>
+      </motion.div>
 
       <div className="relative flex flex-col md:flex-row md:justify-between gap-12 w-full">
         {/* Horizontal Line (Desktop) */}
@@ -70,7 +77,7 @@ export default function PersonalAd() {
             <motion.div
               key={index}
               className="relative flex md:flex-col items-start md:items-center gap-4 w-full md:w-1/4"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: true }}
@@ -91,13 +98,13 @@ export default function PersonalAd() {
                         opacity: 0,
                         scale: 1,
                         x: 0,
-                        y: 0
+                        y: 0,
                       },
                       hover: {
                         opacity: 1,
                         scale: 1.2,
                         x: -5,
-                        y: -5
+                        y: -5,
                       },
                     }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
@@ -128,4 +135,3 @@ export default function PersonalAd() {
     </div>
   );
 }
-
