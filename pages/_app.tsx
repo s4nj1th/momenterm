@@ -5,25 +5,12 @@ import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [darkMode, setDarkMode] = useState(true);
-
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    if (!storedTheme) {
-      // Default to dark mode if no preference is found
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-      setDarkMode(true);
-    } else {
-      const isDark = storedTheme === "dark";
-      setDarkMode(isDark);
-      if (isDark) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    }
+    const theme = storedTheme || (prefersDark ? "dark" : "light");
+    document.documentElement.classList.toggle("dark", theme === "dark");
   }, []);
 
   return (

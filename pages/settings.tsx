@@ -1,41 +1,32 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Switch } from "@headlessui/react";
-import { useRouter } from "next/router";
 
 export default function Settings() {
   const { user, isSignedIn } = useUser();
-  const router = useRouter();
   const [darkMode, setDarkMode] = useState(false);
+  const [unsavedChanges, setUnsavedChanges] = useState(false);
 
   // Load the saved theme on first render
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") || "light";
-    setDarkMode(storedTheme === "dark");
-
-    if (storedTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    const isDark = storedTheme === "dark";
+    setDarkMode(isDark);
+    document.documentElement.classList.toggle("dark", isDark);
   }, []);
 
-  // Toggle theme and save to localStorage
+  // Toggle theme without saving immediately
   const toggleTheme = () => {
-    const newTheme = darkMode ? "light" : "dark";
-    localStorage.setItem("theme", newTheme);
-    setDarkMode(!darkMode);
-
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    setDarkMode((prev) => !prev);
+    setUnsavedChanges(true);
   };
 
+  // Save theme preference only when clicking "Save Changes"
   const saveChanges = () => {
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
-    router.push("/");
+    const newTheme = darkMode ? "dark" : "light";
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", darkMode);
+    setUnsavedChanges(false);
   };
 
   return (
@@ -81,7 +72,7 @@ export default function Settings() {
           checked={darkMode}
           onChange={toggleTheme}
           className={`relative inline-flex items-center h-7 w-14 rounded-full transition-colors duration-300 cursor-pointer ${
-            darkMode ? "bg-[var(--accent-color)]" : "bg-gray-600"
+            darkMode ? "bg-[var(--accent-color)]" : "bg-[var(--secondary-bg)]"
           }`}
         >
           <span
@@ -92,8 +83,12 @@ export default function Settings() {
         </Switch>
       </div>
 
-      {/* Save Button */}
-      <button onClick={saveChanges} className="button w-full mt-6 py-3 text-lg font-semibold">
+      {/* Save Button - Only Show When Changes Are Unsaved */}
+
+      <button
+        onClick={saveChanges}
+        className="button w-full mt-6 py-3 text-lg font-semibold"
+      >
         Save Changes
       </button>
     </div>

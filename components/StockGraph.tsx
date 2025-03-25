@@ -26,6 +26,8 @@ export default function StockGraph() {
     return () => window.removeEventListener("resize", resizeCanvas);
   }, []);
 
+  const MAX_POINTS = 200;
+
   const updateGraph = (timestamp: number) => {
     if (timestamp - lastUpdateTime.current < updateInterval) {
       animationRef.current = requestAnimationFrame(updateGraph);
@@ -35,16 +37,23 @@ export default function StockGraph() {
     lastUpdateTime.current = timestamp;
 
     setData((prev) => {
+      if (prev.length >= MAX_POINTS) {
+        setIsRunning(false);
+        return prev;
+      }
+
       const lastValue = prev[prev.length - 1] || 50;
       let trendUp = Math.random() < 0.7;
       let change = Math.random() * 5 * (trendUp ? 1 : -1);
       if (Math.random() < 0.05) change *= 4;
 
       const newValue = lastValue + change;
-      return [...prev.slice(-120), newValue];
+      return [...prev, newValue];
     });
 
-    animationRef.current = requestAnimationFrame(updateGraph);
+    if (isRunning) {
+      animationRef.current = requestAnimationFrame(updateGraph);
+    }
   };
 
   useEffect(() => {
@@ -172,12 +181,16 @@ export default function StockGraph() {
       />
 
       {/* Play/Pause Button */}
-      <button
+      <motion.button
         onClick={() => setIsRunning(!isRunning)}
         className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-4 bg-[var(--secondary-bg)] text-[var(--text-color)] text-xs rounded-lg z-10 pointer-events-auto cursor-pointer"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: data.length >= MAX_POINTS ? 0 : 1 }} // Fade out when max is reached
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        exit={{ opacity: 0 }} // Ensure it disappears smoothly
       >
         {isRunning ? <FaPause /> : <FaPlay />}
-      </button>
+      </motion.button>
     </>
   );
 }

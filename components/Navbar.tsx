@@ -31,14 +31,15 @@ export default function Navbar({
           <div className="bg-[var(--accent-color)] p-1 rounded mr-4">
           <svg
             version="1.0"
-            className="w-8 h-8"
+            className="w-8 h-8 [stroke-width:12]"
             viewBox="0 0 398.000000 410.000000"
             preserveAspectRatio="xMidYMid meet"
           >
             <g
               transform="translate(0.000000,410.000000) scale(0.100000,-0.100000)"
               fill="var(--alt-text-color)"
-              stroke="none"
+              stroke="currentColor"
+              strokeWidth="12"
             >
               <path
                 d="M1055 4071 c-123 -24 -262 -85 -390 -171 -299 -202 -559 -597 -613

@@ -3,6 +3,7 @@ import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { GiTwoCoins } from "react-icons/gi";
 import { motion } from "framer-motion";
 import { FiChevronDown } from "react-icons/fi";
+import HeroTitle from "./HeroTitle";
 import StockGraph from "./StockGraph";
 import GridLines from "./GridLines";
 import FeaturesAd from "./FeatureAd";
@@ -32,14 +33,7 @@ export default function UnauthenticatedContent() {
 
         {/* Main Content - 80% Width & Height */}
         <div className="relative flex flex-col items-center justify-center w-[80vw] h-[80vh] text-center px-6">
-          <motion.h1
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="text-5xl font-bold drop-shadow-lg mt-[-3rem]"
-          >
-            Manage your Finances
-          </motion.h1>
+          <HeroTitle />
 
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -47,7 +41,7 @@ export default function UnauthenticatedContent() {
             transition={{ delay: 0.5, duration: 1 }}
             className="mt-2 text-lg opacity-90"
           >
-            Get real-time advice for your investments.
+            Get insights and advice for your investments.
           </motion.p>
 
           <motion.div

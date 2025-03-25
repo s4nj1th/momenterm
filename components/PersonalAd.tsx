@@ -1,18 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import { FiTrendingUp } from "react-icons/fi"; // Example Icons
-import {
-  PiHandTapFill,
-  PiMagnifyingGlassFill,
-  PiCheckCircleFill,
-} from "react-icons/pi";
-
-const icons = [
-  PiHandTapFill,
-  PiMagnifyingGlassFill,
-  PiCheckCircleFill,
-  FiTrendingUp,
-]; // Icons Array
 
 const timelineSteps = [
   {
@@ -71,7 +58,6 @@ export default function PersonalAd() {
         <div className="md:hidden absolute left-3 top-0 h-full w-[2px] bg-[var(--accent-color)]" />
 
         {timelineSteps.map((step, index) => {
-          const Icon = icons[index % icons.length]; // Assign unique icon per step
 
           return (
             <motion.div
@@ -90,28 +76,6 @@ export default function PersonalAd() {
                   whileHover="hover" // Triggers hover animation
                   initial="initial"
                 >
-                  {/* Icon - Uses Variants to Sync with Hover */}
-                  <motion.div
-                    className="absolute -top-5 left-0 -translate-x-1/2 mx-auto text-[var(--text-color-hf)] z-50"
-                    variants={{
-                      initial: {
-                        opacity: 0,
-                        scale: 1,
-                        x: 0,
-                        y: 0,
-                      },
-                      hover: {
-                        opacity: 1,
-                        scale: 1.2,
-                        x: -5,
-                        y: -5,
-                      },
-                    }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                  >
-                    <Icon size={40} />
-                  </motion.div>
-
                   {/* Title */}
                   <motion.h3
                     className="relative z-10 text-lg md:text-xl md:border md:hover:border-transparent md:border-[var(--accent-color)] 

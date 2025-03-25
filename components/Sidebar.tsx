@@ -24,7 +24,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
         <ul className="space-y-3">
           <SidebarItem href="/" icon={<FiHome size={22} />} text="Home" showText={isOpen} />
           <SidebarItem href="/dashboard" icon={<FiBarChart2 size={22} />} text="Dashboard" showText={isOpen} />
-          <SidebarItem href="/watchlist" icon={<FiStar size={22} />} text="Watchlist" showText={isOpen} /> {/* ✅ Added Watchlist */}
+          <SidebarItem href="/watchlist" icon={<FiStar size={22} />} text="Watchlist" showText={isOpen} />
           <SidebarItem href="/settings" icon={<FiSettings size={22} />} text="Settings" showText={isOpen} />
         </ul>
       </nav>

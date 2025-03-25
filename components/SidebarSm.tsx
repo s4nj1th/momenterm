@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { FiHome, FiBarChart2, FiSettings, FiX } from "react-icons/fi";
+import { FiHome, FiBarChart2, FiSettings, FiStar } from "react-icons/fi";
 
 export default function SidebarSm({
   isOpen,
@@ -25,6 +25,7 @@ export default function SidebarSm({
             <ul className="space-y-4 text-white text-lg">
               <SidebarItem href="/" icon={<FiHome size={22} />} text="Home" />
               <SidebarItem href="/dashboard" icon={<FiBarChart2 size={22} />} text="Dashboard" />
+              <SidebarItem href="/watchlist" icon={<FiStar size={22} />} text="Watchlist" />
               <SidebarItem href="/settings" icon={<FiSettings size={22} />} text="Settings" />
             </ul>
           </nav>
