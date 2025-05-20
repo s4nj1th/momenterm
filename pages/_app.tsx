@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ClerkProvider } from "@clerk/nextjs";
 import Layout from "../components/Layout";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {

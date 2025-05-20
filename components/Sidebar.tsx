@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FiHome, FiBarChart2, FiSettings, FiStar } from "react-icons/fi"; // Added FiStar for Watchlist icon
+import { FiHome, FiBarChart2, FiSettings, FiStar } from "react-icons/fi";
 import { useEffect, useState } from "react";
 
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
@@ -7,7 +7,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
 
   useEffect(() => {
     if (isOpen) {
-      const timer = setTimeout(() => setShowText(true), 300);
+      const timer = setTimeout(() => setShowText(true), 300); // Delay showing text for smooth open
       return () => clearTimeout(timer);
     } else {
       setShowText(false);
@@ -22,17 +22,27 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
     >
       <nav className="mt-6 flex flex-col">
         <ul className="space-y-3">
-          <SidebarItem href="/" icon={<FiHome size={22} />} text="Home" showText={isOpen} />
-          <SidebarItem href="/dashboard" icon={<FiBarChart2 size={22} />} text="Dashboard" showText={isOpen} />
-          <SidebarItem href="/watchlist" icon={<FiStar size={22} />} text="Watchlist" showText={isOpen} />
-          <SidebarItem href="/settings" icon={<FiSettings size={22} />} text="Settings" showText={isOpen} />
+          <SidebarItem href="/" icon={<FiHome size={22} />} text="Home" showText={showText} />
+          <SidebarItem href="/dashboard" icon={<FiBarChart2 size={22} />} text="Dashboard" showText={showText} />
+          <SidebarItem href="/watchlist" icon={<FiStar size={22} />} text="Watchlist" showText={showText} />
+          <SidebarItem href="/settings" icon={<FiSettings size={22} />} text="Settings" showText={showText} />
         </ul>
       </nav>
     </aside>
   );
 }
 
-function SidebarItem({ href, icon, text, showText }: { href: string; icon: React.ReactNode; text: string; showText: boolean }) {
+function SidebarItem({
+  href,
+  icon,
+  text,
+  showText,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  text: string;
+  showText: boolean;
+}) {
   return (
     <li>
       <Link
@@ -41,8 +51,8 @@ function SidebarItem({ href, icon, text, showText }: { href: string; icon: React
       >
         <div className="w-10 flex justify-center">{icon}</div>
         <span
-          className={`ml-2 transition-all duration-300 ${
-            showText ? "opacity-100 w-auto" : "opacity-0 w-0"
+          className={`ml-2 overflow-hidden whitespace-nowrap transition-all duration-300 ${
+            showText ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
           }`}
         >
           {text}

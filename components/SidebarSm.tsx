@@ -11,16 +11,19 @@ export default function SidebarSm({
 }) {
   return (
     <>
-      {/* Sidebar Container */}
+      {isOpen && (
+        <div
+          onClick={onClose}
+          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity"
+        />
+      )}
+
       <div
-        className={`fixed inset-0 z-40 transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-40 transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Sidebar */}
-        <aside className="fixed top-0 left-0 h-full w-[80vw] max-w-[300px] bg-[var(--sec-bg-op)] shadow-lg p-4">
-
-          {/* Sidebar Navigation */}
+        <aside className="h-full w-[80vw] max-w-[300px] bg-[var(--sec-bg-op)] shadow-lg p-4">
           <nav className="mt-16 flex flex-col">
             <ul className="space-y-4 text-white text-lg">
               <SidebarItem href="/" icon={<FiHome size={22} />} text="Home" />
@@ -35,7 +38,15 @@ export default function SidebarSm({
   );
 }
 
-function SidebarItem({ href, icon, text }: { href: string; icon: React.ReactNode; text: string }) {
+function SidebarItem({
+  href,
+  icon,
+  text,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  text: string;
+}) {
   return (
     <li>
       <Link

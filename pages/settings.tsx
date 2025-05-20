@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Switch } from "@headlessui/react";
@@ -7,7 +9,6 @@ export default function Settings() {
   const [darkMode, setDarkMode] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
-  // Load the saved theme on first render
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") || "light";
     const isDark = storedTheme === "dark";
@@ -15,13 +16,11 @@ export default function Settings() {
     document.documentElement.classList.toggle("dark", isDark);
   }, []);
 
-  // Toggle theme without saving immediately
   const toggleTheme = () => {
     setDarkMode((prev) => !prev);
     setUnsavedChanges(true);
   };
 
-  // Save theme preference only when clicking "Save Changes"
   const saveChanges = () => {
     const newTheme = darkMode ? "dark" : "light";
     localStorage.setItem("theme", newTheme);
@@ -40,7 +39,6 @@ export default function Settings() {
             alt="Profile"
             className="w-16 h-16 rounded-full border-2 border-[var(--accent-color)]"
           />
-
           <div>
             <p className="text-lg font-semibold">
               {user.fullName || "No Name Set"}
@@ -50,12 +48,9 @@ export default function Settings() {
         </div>
       )}
 
-      {/* Email Settings - Show Only If Signed In */}
       {isSignedIn && (
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-300">
-            Email
-          </label>
+          <label className="block text-sm font-medium text-gray-300">Email</label>
           <input
             type="email"
             value={user.primaryEmailAddress}
@@ -65,7 +60,6 @@ export default function Settings() {
         </div>
       )}
 
-      {/* Theme Toggle */}
       <div className="flex justify-between items-center p-4 rounded-lg transition">
         <span className="text-lg font-semibold">Dark Mode</span>
         <Switch
@@ -83,14 +77,14 @@ export default function Settings() {
         </Switch>
       </div>
 
-      {/* Save Button - Only Show When Changes Are Unsaved */}
-
-      <button
-        onClick={saveChanges}
-        className="button w-full mt-6 py-3 text-lg font-semibold"
-      >
-        Save Changes
-      </button>
+      {unsavedChanges && (
+        <button
+          onClick={saveChanges}
+          className="button w-full mt-6 py-3 text-lg font-semibold"
+        >
+          Save Changes
+        </button>
+      )}
     </div>
   );
 }

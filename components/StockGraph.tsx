@@ -43,7 +43,7 @@ export default function StockGraph() {
       }
 
       const lastValue = prev[prev.length - 1] || 50;
-      let trendUp = Math.random() < 0.7;
+      const trendUp = Math.random() < 0.7;
       let change = Math.random() * 5 * (trendUp ? 1 : -1);
       if (Math.random() < 0.05) change *= 4;
 
@@ -99,8 +99,8 @@ export default function StockGraph() {
     ctx.beginPath();
 
     const startX = 0;
-    let firstX = startX;
-    let firstY =
+    const firstX = startX;
+    const firstY =
       graphTopPadding +
       graphHeight -
       ((data[0] - minVal) / range) * graphHeight;
@@ -180,14 +180,13 @@ export default function StockGraph() {
         transition={{ duration: 1 }}
       />
 
-      {/* Play/Pause Button */}
       <motion.button
         onClick={() => setIsRunning(!isRunning)}
         className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-4 bg-[var(--secondary-bg)] text-[var(--text-color)] text-xs rounded-lg z-10 pointer-events-auto cursor-pointer"
         initial={{ opacity: 1 }}
-        animate={{ opacity: data.length >= MAX_POINTS ? 0 : 1 }} // Fade out when max is reached
+        animate={{ opacity: data.length >= MAX_POINTS ? 0 : 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        exit={{ opacity: 0 }} // Ensure it disappears smoothly
+        exit={{ opacity: 0 }}
       >
         {isRunning ? <FaPause /> : <FaPlay />}
       </motion.button>

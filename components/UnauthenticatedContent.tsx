@@ -23,15 +23,12 @@ export default function UnauthenticatedContent() {
 
   return (
     <div className="w-full">
-      {/* Hero Section */}
       <div className="relative flex flex-col items-center justify-center h-screen min-h-screen">
-        {/* Background Graph - Canvas at 80vw x 80vh */}
         <div className="absolute w-[80vw] h-[80vh]">
           <StockGraph />
           <GridLines />
         </div>
 
-        {/* Main Content - 80% Width & Height */}
         <div className="relative flex flex-col items-center justify-center w-[80vw] h-[80vh] text-center px-6">
           <HeroTitle />
 
@@ -60,7 +57,6 @@ export default function UnauthenticatedContent() {
               </motion.button>
             </SignUpButton>
 
-            {/* Sign-in Link - Placed Directly Below the Button */}
             <span className="text-sm text-[var(--text-color)] -mt-2">
               Already have an account?{" "}
               <SignInButton>
@@ -72,24 +68,20 @@ export default function UnauthenticatedContent() {
           </motion.div>
         </div>
 
-        {/* Floating Scroll Indicator */}
         <motion.div
           initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: showScrollHint ? 1 : 0, y: showScrollHint ? 0 : 20 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="absolute bottom-25 flex flex-col items-center justify-center"
         >
-          { /*<span className="text-sm text-[var(--text-color)] opacity-75 mb-2">More below</span>*/ }
           <FiChevronDown className="text-2xl text-[var(--accent-color)] animate-bounce" />
         </motion.div>
       </div>
 
-      {/* Features Section (Below, Only Visible When Scrolling) */}
       <div className="w-full py-20 flex justify-center rounded-lg">
         <FeaturesAd />
       </div>
 
-      {/* Personalization Section (Below, Only Visible When Scrolling) */}
       <div className="w-full mt-50 py-20 flex justify-center rounded-lg">
         <PersonalAd />
       </div>
