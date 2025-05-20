@@ -47,7 +47,7 @@ export default function UnauthenticatedContent() {
             transition={{ delay: 1.5, duration: 1 }}
             className="mt-10 flex flex-col items-center space-y-3 opacity-80"
           >
-            <SignUpButton asChild>
+            <SignUpButton>
               <motion.button
                 className="alt-button flex items-center gap-2"
                 whileHover={{ scale: 1.05 }}
