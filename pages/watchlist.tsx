@@ -11,25 +11,21 @@ interface Stock {
 }
 
 export default function Watchlist() {
-  const { isSignedIn, user } = useUser();
+  const { isSignedIn } = useUser(); // removed 'user'
   const [watchlist, setWatchlist] = useState<Stock[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isSignedIn) return; // Don't fetch if user is not signed in
+    if (!isSignedIn) return;
 
     fetch("/api/watchlist")
       .then((res) => {
-        if (!res.ok) {
-          throw new Error(`API Error: ${res.status}`);
-        }
+        if (!res.ok) throw new Error(`API Error: ${res.status}`);
         return res.json();
       })
       .then((data) => {
-        if (data?.stocks) {
-          setWatchlist(data.stocks);
-        }
+        if (data?.stocks) setWatchlist(data.stocks);
       })
       .catch((err) => {
         console.error("Error fetching watchlist:", err);
@@ -38,7 +34,8 @@ export default function Watchlist() {
       .finally(() => setIsLoading(false));
   }, [isSignedIn]);
 
-  if (!isSignedIn) return <p className="p-6">Please log in to view your watchlist.</p>;
+  if (!isSignedIn)
+    return <p className="p-6">Please log in to view your watchlist.</p>;
   if (isLoading) return <p className="p-6">Loading your watchlist...</p>;
   if (error) return <p className="p-6 text-red-500">{error}</p>;
 
