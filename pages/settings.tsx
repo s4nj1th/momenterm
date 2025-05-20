@@ -43,7 +43,9 @@ export default function Settings() {
             <p className="text-lg font-semibold">
               {user.fullName || "No Name Set"}
             </p>
-            <p className="text-sm text-gray-400">{user.primaryEmailAddress}</p>
+            <p className="text-sm text-gray-400">
+              {user.primaryEmailAddress?.emailAddress || "No email found"}
+            </p>
           </div>
         </div>
       )}
@@ -53,7 +55,7 @@ export default function Settings() {
           <label className="block text-sm font-medium text-gray-300">Email</label>
           <input
             type="email"
-            value={user.primaryEmailAddress}
+            value={user.primaryEmailAddress?.emailAddress || ""}
             disabled
             className="input mt-2 w-full bg-gray-800 text-gray-500 cursor-not-allowed"
           />
