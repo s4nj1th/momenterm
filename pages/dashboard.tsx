@@ -1,4 +1,5 @@
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
+import StockList from "../components/StockList";
 
 export default function Dashboard() {
   return (
@@ -7,8 +8,9 @@ export default function Dashboard() {
         <RedirectToSignIn />
       </SignedOut>
       <SignedIn>
-        <h1 className="text-3xl font-bold text-[var(--accent-color)]">Your Dashboard</h1>
-        <p className="mt-2">This is a protected page.</p>
+        <h1 className="text-3xl font-bold pb-6">Stocks</h1>
+        {/* Top Stocks */}
+        <StockList />
       </SignedIn>
     </div>
   );
