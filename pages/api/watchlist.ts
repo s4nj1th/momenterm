@@ -28,6 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       let watchlist = await Watchlist.findOne({ userId });
 
+      
       if (!watchlist) {
         watchlist = new Watchlist({ userId, stocks: [] });
       }
