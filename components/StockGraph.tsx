@@ -1,32 +1,19 @@
 "use client";
-import "../styles/vars.css";
+
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { FaPause, FaPlay } from "react-icons/fa";
 
 export default function StockGraph() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [data, setData] = useState<number[]>([]);
-  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const [isRunning, setIsRunning] = useState(true);
   const animationRef = useRef<number | null>(null);
   const lastUpdateTime = useRef(0);
   const updateInterval = 100;
-
-  useEffect(() => {
-    const resizeCanvas = () => {
-      const width = window.innerWidth * 0.8;
-      const maxHeight = width;
-      const height = Math.min(window.innerHeight * 0.7, maxHeight);
-      setCanvasSize({ width, height });
-    };
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-    return () => window.removeEventListener("resize", resizeCanvas);
-  }, []);
-
   const MAX_POINTS = 200;
+
+  const width = 600;
+  const height = 300;
 
   const updateGraph = (timestamp: number) => {
     if (timestamp - lastUpdateTime.current < updateInterval) {
@@ -74,13 +61,12 @@ export default function StockGraph() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const { width, height } = canvasSize;
     canvas.width = width;
     canvas.height = height;
 
     const minVal = Math.min(...data, 30);
     const maxVal = Math.max(...data, 100);
-    const range = maxVal - minVal;
+    const range = maxVal - minVal || 1;
 
     const graphHeight = height * 0.7;
     const graphTopPadding = height * 0.15;
@@ -88,32 +74,27 @@ export default function StockGraph() {
 
     ctx.clearRect(0, 0, width, height);
 
-    // Gradient for main stock line
     const gradient = ctx.createLinearGradient(0, 0, width, 0);
     gradient.addColorStop(0, "#db67e679");
     gradient.addColorStop(0.5, "#db67e6");
     gradient.addColorStop(1, "#f581ff");
 
     ctx.strokeStyle = gradient;
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
     ctx.beginPath();
 
     const startX = 0;
-    const firstX = startX;
     const firstY =
-      graphTopPadding +
-      graphHeight -
-      ((data[0] - minVal) / range) * graphHeight;
+      graphTopPadding + graphHeight - ((data[0] - minVal) / range) * graphHeight;
 
-    ctx.moveTo(firstX, firstY);
-    let lastX = firstX;
+    ctx.moveTo(startX, firstY);
+    let lastX = startX;
     let lastY = firstY;
 
     data.forEach((val, i) => {
-      const x = startX - 5 + (i / data.length) * graphWidth;
+      const x = startX + (i / data.length) * graphWidth;
       const y =
         graphTopPadding + graphHeight - ((val - minVal) / range) * graphHeight;
-
       ctx.lineTo(x, y);
       lastX = x;
       lastY = y;
@@ -121,13 +102,8 @@ export default function StockGraph() {
 
     ctx.stroke();
 
-    // Gradient Fill (Mountain Effect)
-    const fillGradient = ctx.createLinearGradient(
-      0,
-      graphTopPadding,
-      0,
-      height
-    );
+    // Gradient Fill
+    const fillGradient = ctx.createLinearGradient(0, graphTopPadding, 0, height);
     fillGradient.addColorStop(0, "#db67e679");
     fillGradient.addColorStop(0.5, "#db67e644");
     fillGradient.addColorStop(0.9, "#0000");
@@ -137,59 +113,31 @@ export default function StockGraph() {
     ctx.lineTo(startX, height);
     ctx.closePath();
     ctx.fill();
-
-    // Dashed guide lines
-    ctx.strokeStyle = "rgba(219, 103, 230, 0.7)";
-    ctx.lineWidth = 1;
-    ctx.setLineDash([6, 6]);
-
-    // Left guide line
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(0, lastY);
-    ctx.stroke();
-
-    // Top guide line
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(lastX, 0);
-    ctx.stroke();
-
-    // Right guide line
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(width, lastY);
-    ctx.stroke();
-
-    // Bottom guide line
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(lastX, height);
-    ctx.stroke();
-
-    ctx.setLineDash([]);
-  }, [data, canvasSize]);
+  }, [data]);
 
   return (
-    <>
-      <motion.canvas
-        ref={canvasRef}
-        className="absolute inset-0 bg-transparent pointer-events-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      />
-
-      <motion.button
-        onClick={() => setIsRunning(!isRunning)}
-        className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-4 bg-[var(--secondary-bg)] text-[var(--text-color)] text-xs rounded-lg z-10 pointer-events-auto cursor-pointer"
-        initial={{ opacity: 1 }}
-        animate={{ opacity: data.length >= MAX_POINTS ? 0 : 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        exit={{ opacity: 0 }}
-      >
-        {isRunning ? <FaPause /> : <FaPlay />}
-      </motion.button>
-    </>
+    <div className="flex justify-end w-full">
+      <div className="w-full md:w-4/6 p-4 bg-[var(--secondary-bg)] rounded-xl shadow-md">
+        <h2 className="text-xl font-semibold mb-4">📈 Simulated Stock Graph</h2>
+        <canvas
+          ref={canvasRef}
+          className="rounded-lg border w-full h-[400px] max-h-[350px]"
+        />
+        <button
+          onClick={() => setIsRunning(!isRunning)}
+          className="mt-4 px-4 py-2 bg-[var(--accent-lighter)] text-sm rounded"
+        >
+          {isRunning ? (
+            <span className="flex items-center gap-2">
+              <FaPause /> Pause
+            </span>
+          ) : (
+            <span className="flex items-center gap-2">
+              <FaPlay /> Resume
+            </span>
+          )}
+        </button>
+      </div>
+    </div>
   );
 }
