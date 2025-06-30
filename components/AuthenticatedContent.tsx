@@ -5,14 +5,13 @@ import StockGraph from "./StockGraph";
 
 export default function AuthenticatedContent() {
   return (
-    <div className="p-6 space-y-8 text-[var(--text-color)]">
+    <div className="w-full space-y-8 text-[var(--text-color)] p-0 m-0">{/* Ensure no padding/margin */}
       <h1 className="text-3xl font-bold">Welcome Back to MomenTerm</h1>
 
-      <div className="flex flex-col md:flex-row gap-6">
-            <div className="md:w-1/2">{<PortfolioCard />}</div>
-            <StockGraph />
+      <div className="flex flex-row w-full gap-0">{/* Remove gap, force row, full width */}
+        <div className="hidden md:block md:w-1/2"><PortfolioCard /></div>
+        <div className="flex-1 w-full flex items-stretch"><StockGraph /></div>
       </div>
-
     </div>
   );
 }

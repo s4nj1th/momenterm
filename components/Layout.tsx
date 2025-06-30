@@ -39,7 +39,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         }`}
       >
         <Navbar onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
-        <main className="p-6 mt-8">{children}</main>
+        <main className="mt-8">{children}</main> {/* Removed p-6 for edge-to-edge */}
       </div>
     </div>
   );
